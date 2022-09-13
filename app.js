@@ -116,6 +116,21 @@ console.log('<----------------EJERCICIO PROMISES-------------------->')
  * 4. console.log el resultado de getVideo () en main ()
  */
 
+// Creando promise suscripción
+function EstadoSuscripción (suscripción) {
+    return new Promise ((resolve, reject) => {
+        resolve (suscripción)
+    })
+}
+
+let Suscripción_texto = document.querySelector('.suscripcion')
+
+async function SuscripcionREF (suscripcion) {
+    Suscripción_texto.innerHTML = await EstadoSuscripción(suscripcion)
+}
+
+SuscripcionREF('VIP')
+
 //MI MANERA
 function GetVideo(SubscriptionStatus) {
     if (SubscriptionStatus === 'VIP') {
@@ -143,5 +158,36 @@ main_1('FREE')
 
 //MANERA CORRECTA
 
+function obtenerVideo(EstadoSuscripción) {
+    return new Promise((resolve, reject) => {
+        if (EstadoSuscripción === 'VIP') {
+            resolve ('Mostrar Video')
+        }
+        else if (EstadoSuscripción === 'FREE') {
+            resolve ('Mostrar Trailer')
+        }
+        else {
+            reject ('No Video')
+        }
+    })
+
+}
+
+let videoREF = document.querySelector('.video')
+
+async function Principal(Suscripción) {
+    const estado = await EstadoSuscripción(Suscripción)
+    Suscripción_texto.innerHTML = estado
+    videoREF.innerHTML = 'Video'
+    try{
+        console.log(await obtenerVideo(estado))
+    }
+    catch (e) {
+        console.log(e)
+        videoREF.innerHTML = e
+    }
+}
+
+Principal('FREE')
 
 

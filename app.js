@@ -76,7 +76,9 @@ const lastConnectRef = document.querySelector('.lastconnect')
 
 function getLastClass() {
     return new Promise ((resolve, reject) => {
-        resolve('Flexbox Class')
+        setTimeout (() => {
+            resolve('Flexbox Class')
+        }, 1500)
     })
 }
 
@@ -100,3 +102,46 @@ async function getLastConnectionREF() {
 }
 
 getLastConnectionREF();
+
+
+console.log('<----------------EJERCICIO PROMISES-------------------->')
+/**
+ * EJERCICIO DE PROMISES
+ * 1. Crea una función llamada "GetVideo"
+ * 2. Acepta un parámetro llamado 'SubscriptionStatus'
+ * 3. Retorna una promesa dentro de la función que:
+ *      - Si es "VIP" resolve("show video")
+ *      - Si es "FREE" resolve("show trailer")
+ *      - Si no es ninguno reject ("No video")
+ * 4. console.log el resultado de getVideo () en main ()
+ */
+
+//MI MANERA
+function GetVideo(SubscriptionStatus) {
+    if (SubscriptionStatus === 'VIP') {
+        return new Promise ((resolve, reject) => {
+            resolve ('show video')
+        })
+    } 
+    else if (SubscriptionStatus === 'FREE') {
+        return new Promise ((resolve, reject) => {
+            resolve ('Update Subscription to Show Video')
+        })
+    }
+    else {
+        return new Promise ((resolve, reject) => {
+            resolve ('No video')
+        })
+    }
+}
+
+async function main_1(argument1) {
+    console.log(await GetVideo(argument1))
+}
+
+main_1('FREE')
+
+//MANERA CORRECTA
+
+
+
